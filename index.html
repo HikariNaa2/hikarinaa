@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HikariNaa | Web Dev Portfolio</title>
+<!-- Meta SEO -->
+<meta name="description" content="Portofolio web development HikariNaa – menampilkan berbagai proyek modern, mulai dari e-commerce hingga aplikasi web interaktif.">
+<meta name="keywords" content="HikariNaa, Web Developer, Portfolio, Web Development, Full Stack Developer, React, Node.js, E-commerce, Frontend, Backend">
+<meta name="author" content="HikariNaa">
+<!-- Favicon -->
+<link rel="icon" href="https://graciasmarket.com/wp-content/uploads/2025/06/cropped-si-192x192.png" type="image/x-icon">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary: #44d62c; /* Razer green */
+            --dark: #111111;
+            --darker: #0a0a0a;  
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--darker);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .razer-border {
+            position: relative;
+        }
+        
+        .razer-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 8px rgba(68, 214, 44, 0.6);
+        }
+        
+        .glow-box {
+            box-shadow: 0 0 15px rgba(68, 214, 44, 0.3);
+        }
+        
+        .glow-box:hover {
+            box-shadow: 0 0 25px rgba(68, 214, 44, 0.5);
+            transform: translateY(-5px);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: black;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 0 20px var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: black;
+            box-shadow: 0 0 20px var(--primary);
+        }
+        
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        .project-card {
+            background: rgba(17, 17, 17, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(68, 214, 44, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            border-color: var(--primary);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .scroll-indicator::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 35px;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            opacity: 0.8;
+        }
+        
+        .scroll-indicator::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll_anim 2s infinite;
+        }
+        
+        @keyframes scroll_anim {
+            0% {
+                top: 8px;
+                opacity: 1;
+            }
+            100% {
+                top: 22px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="relative">
+    <div id="particles-js"></div>
+    
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-black bg-opacity-90 z-50 px-6 py-4 flex justify-between items-center border-b border-gray-800">
+        <div class="flex items-center space-x-2">
+            <i class="fas fa-code text-2xl text-green-500"></i>
+            <span class="text-xl font-bold glow-text">HikariNaa</span>
+        </div>
+
+        <div class="hidden md:flex space-x-8 items-center">
+            <a href="#home" class="nav-link">HOME</a>
+            <a href="#projects" class="nav-link">PROJECTS</a>
+            <a href="#skills" class="nav-link">SKILLS</a>
+            <a href="#about" class="nav-link">ABOUT</a>
+            <a href="#contact" class="nav-link">CONTACT</a>
+        </div>
+        
+        <button class="md:hidden text-white focus:outline-none">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+        
+ <a href="login.html" target="_blank" class="hidden md:block btn-primary px-6 py-2 rounded-full">
+    LogOut
+</a>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center text-center px-4 relative overflow-hidden">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex justify-center mb-8">
+                <div class="w-32 h-32 rounded-full border-4 border-green-500 overflow-hidden glow-box">
+                    <!-- Placeholder for profile image -->
+                    <div class="w-full h-full bg-gray-800 flex items-center justify-center">
+                        <i class="fas fa-user text-4xl text-green-500"></i>
+                    
+                        
+
+                    
+                    </div>
+                </div>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 glow-text">HikariNaa</h1>
+            <div class="relative inline-block">
+                <h2 class="text-2xl md:text-3xl mb-6 inline-block razer-border pb-2">WEB DEVELOPMENT <span class="text-green-500">EXPERT</span></h2>
+            </div>
+            
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-gray-300">
+                Ahli dalam pengembangan website modern, responsif, dan scalable dengan React, Vue, Node.js, dan MongoDB.
+            </p>
+            
+            <div class="flex justify-center space-x-4">
+    <a href="project.html" class="btn-primary px-8 py-3 rounded-full text-lg font-semibold inline-block">
+        LIHAT PROJECT
+    </a>
+    
+    </a>
+</div>
+
+            
+            <div class="scroll-indicator"></div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black to-transparent"></div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-black bg-opacity-50">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-center glow-text">PROJECT <span class="text-green-500">SHOWCASE</span></h2>
+            <div class="w-24 h-1 bg-green-500 mx-auto mb-12"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card rounded-lg glow-box overflow-hidden transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://idcloudhost.com/wp-content/uploads/2020/10/Cara-Berjualan-di-Shopee-min.png" alt="Project 1" class="w-full h-full object-cover">
+                        
+                    </div></a>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">E-Commerce Platform</h3>
+                        <p class="text-gray-400 mb-4">Solusi e-commerce full-stack menggunakan React, Node.js, dan MongoDB.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-green-500">REACT</span>
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-green-500">NODE.JS</span>
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-green-500">MONGODB</span>
+                        </div>
+                        <a href="project.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                            Lihat Lebih Detail <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card rounded-lg glow-box overflow-hidden transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.ctfassets.net/aw6mkmszlj4x/Jw386RSJGGVIIWKLOdDGG/4e48b719fccea9e3fb0fad96449555f9/Set_Top_Box.png" alt="Project 2" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Real-Time Dashboard</h3>
+                        <p class="text-gray-400 mb-4">Dashboard analitik dengan visualisasi data langsung menggunakan D3.js.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-green-500">D3.JS</span>
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-green-500">VUE</span>
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-green-500">WEBSOCKETS</span>
+                        </div>
+                        <a href="project.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                            Lihat Lebih Detail <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card rounded-lg glow-box overflow-hidden transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://cdn.dribbble.com/userupload/29229241/file/original-a4a2c0489cb4c31202cb4b3668954905.png" alt="Project 3" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Mobile Banking App</h3>
+                        <p class="text-gray-400 mb-4">Aplikasi mobile banking yang aman dengan autentikasi biometrik.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-green-500">REACT NATIVE</span>
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-green-500">FIREBASE</span>
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-green-500">BLOCKCHAIN</span>
+                        </div>
+                        <a href="project.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                            Lihat Lebih Detail <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+    <a href="project.html" class="btn-outline px-8 py-3 rounded-full text-lg font-semibold inline-block">
+        LIHAT SEMUA PROJECT
+    </a>
+</div>
+
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-70 z-0"></div>
+        <div class="container mx-auto px-4 max-w-6xl relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-center glow-text">TECHNICAL <span class="text-green-500">EXPERTISE</span></h2>
+            <div class="w-24 h-1 bg-green-500 mx-auto mb-12"></div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Skill 1 -->
+                <div class="bg-gray-900 rounded-lg p-6 text-center glow-box hover:border-green-500 border border-gray-800 transition-all duration-300">
+                    <div class="text-5xl mb-4 text-green-500">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">React.js</h3>
+                    <div class="h-2 bg-gray-800 rounded-full mb-2">
+                        <div class="h-2 bg-green-500 rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+                
+                <!-- Skill 2 -->
+                <div class="bg-gray-900 rounded-lg p-6 text-center glow-box hover:border-green-500 border border-gray-800 transition-all duration-300">
+                    <div class="text-5xl mb-4 text-green-500">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Node.js</h3>
+                    <div class="h-2 bg-gray-800 rounded-full mb-2">
+                        <div class="h-2 bg-green-500 rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+                
+                <!-- Skill 3 -->
+                <div class="bg-gray-900 rounded-lg p-6 text-center glow-box hover:border-green-500 border border-gray-800 transition-all duration-300">
+                    <div class="text-5xl mb-4 text-green-500">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">MongoDB</h3>
+                    <div class="h-2 bg-gray-800 rounded-full mb-2">
+                        <div class="h-2 bg-green-500 rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+                
+                <!-- Skill 4 -->
+                <div class="bg-gray-900 rounded-lg p-6 text-center glow-box hover:border-green-500 border border-gray-800 transition-all duration-300">
+                    <div class="text-5xl mb-4 text-green-500">
+                        <i class="fab fa-vuejs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Vue.js</h3>
+                    <div class="h-2 bg-gray-800 rounded-full mb-2">
+                        <div class="h-2 bg-green-500 rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-bold mb-4 text-green-500">Frontend</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>React.js, Vue.js</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>HTML5, CSS3, SASS</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>JavaScript, TypeScript</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Responsive Design</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-bold mb-4 text-green-500">Backend</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Node.js, Express</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Python, Django</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>RESTful APIs</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>GraphQL</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-bold mb-4 text-green-500">DevOps & Tools</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Docker, Kubernetes</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>AWS, GCP</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Git, CI/CD</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Agile Methodologies</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-black bg-opacity-50">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-center glow-text">TENTANG <span class="text-green-500">SAYA</span></h2>
+            <div class="w-24 h-1 bg-green-500 mx-auto mb-12"></div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/3">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-green-500 blur opacity-75 group-hover:opacity-100 transition duration-200 animate-tilt rounded-lg"></div>
+                        <div class="relative bg-gray-900 rounded-lg overflow-hidden">
+                            <img src="warset.png" alt="HikariNaa" class="w-full h-auto">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3">
+                    <h3 class="text-2xl font-bold mb-4 text-green-500">Professional Web Developer</h3>
+                    <p class="text-gray-300 mb-6">
+                       Saya Achmad yasin hidayat dengan Nim 241730103, saya mengkhususkan diri dalam membangun aplikasi web yang berperforma tinggi, scalable, dan menghadirkan pengalaman pengguna yang luar biasa. Saya memiliki passion dalam menyelesaikan masalah kompleks dengan kode yang elegan, serta selalu mengikuti perkembangan teknologi terbaru.
+
+
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div>
+                            <h4 class="font-bold mb-2 flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Clean Code</span>
+                            </h4>
+                            <p class="text-gray-400">
+Saya menulis kode yang mudah dipelihara dan terdokumentasi dengan baik, mengikuti praktik terbaik dan pola desain yang tepat.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold mb-2 flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Performance Focus</span>
+                            </h4>
+                            <p class="text-gray-400">
+Aplikasi yang dioptimalkan dengan waktu muat cepat dan interaksi yang mulus adalah prioritas utama saya.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold mb-2 flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>User-Centric</span>
+                            </h4>
+                            <p class="text-gray-400">
+Saya merancang dengan pendekatan user-first, memastikan antarmuka yang intuitif dan mudah diakses.                            </p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold mb-2 flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Continuous Learning</span>
+                            </h4>
+                            <p class="text-gray-400">
+Berkomitmen untuk terus mengikuti teknologi terbaru dan tren industri agar selalu relevan.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-70 z-0"></div>
+        <div class="container mx-auto px-4 max-w-6xl relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-center glow-text">HUBUNGI <span class="text-green-500">SAYA</span></h2>
+            <div class="w-24 h-1 bg-green-500 mx-auto mb-12"></div>
+            
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-6 text-green-500">Informasi Kontak Saya</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-green-500 text-xl mr-4 mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Email</h4>
+                                <p class="text-gray-300">achmadshin123@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-green-500 text-xl mr-4 mt-1">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Whatsapp</h4>
+                                <p class="text-gray-300">+62 812-1302-9923</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-green-500 text-xl mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Alamat</h4>
+                                <p class="text-gray-300">Banten, Indonesia</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10">
+                        <h4 class="font-bold mb-4 text-green-500">Social Media Saya</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 rounded-full border border-green-500 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-black transition-colors">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full border border-green-500 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-black transition-colors">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full border border-green-500 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-black transition-colors">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.instagram.com/ach_yasin0_0/profilecard/?igsh=MTFrbGV4N293NWd6OQ==" class="w-10 h-10 rounded-full border border-green-500 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-black transition-colors">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+               <div class="md:w-1/2">
+    <form id="waForm" class="space-y-6">
+        <div>
+            <label for="name" class="block mb-2 text-gray-300">Nama Anda</label>
+            <input type="text" id="name" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-white">
+        </div>
+
+        <div>
+            <label for="email" class="block mb-2 text-gray-300">Email Anda</label>
+            <input type="email" id="email" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-white">
+        </div>
+
+        <div>
+            <label for="subject" class="block mb-2 text-gray-300">Subject</label>
+            <input type="text" id="subject" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-white">
+        </div>
+
+        <div>
+            <label for="message" class="block mb-2 text-gray-300">Pesan Anda</label>
+            <textarea id="message" rows="5" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-white"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary w-full py-3 rounded-lg text-lg font-semibold">Kirim Pesan</button>
+    </form>
+</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center mb-6">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-code text-2xl text-green-500"></i>
+                    <span class="text-xl font-bold glow-text">HikariNaa</span>
+                </div>
+            </div>
+            
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#home" class="text-gray-400 hover:text-green-500 transition-colors">Home</a>
+                <a href="#projects" class="text-gray-400 hover:text-green-500 transition-colors">Projects</a>
+                <a href="#skills" class="text-gray-400 hover:text-green-500 transition-colors">Skills</a>
+                <a href="#about" class="text-gray-400 hover:text-green-500 transition-colors">About</a>
+                <a href="#contact" class="text-gray-400 hover:text-green-500 transition-colors">Contact</a>
+            </div>
+            
+            <div class="flex justify-center space-x-4 mb-8">
+                <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:border-green-500 hover:text-green-500 transition-colors">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:border-green-500 hover:text-green-500 transition-colors">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:border-green-500 hover:text-green-500 transition-colors">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:border-green-500 hover:text-green-500 transition-colors">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            
+           <p class="text-gray-500 text-sm">
+    &copy; 2025 Winata Liu. All Rights Reserved.  
+    <a href="https://graciasmarket.com" class="text-green-500 hover:underline" target="_blank" rel="noopener">
+        Pembuatan Website Terbaik
+    </a>
+</p>
+
+               <a href="https://wa.me/6281213029923" target="_blank"
+   class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-lg transition duration-300">
+   <i class="fab fa-whatsapp text-2xl"></i>
+</a>
+
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#44d62c"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#44d62c",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.5
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.querySelector('.hidden.md\\:flex');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+                mobileMenu.classList.toggle('flex-col');
+                mobileMenu.classList.toggle('absolute');
+                mobileMenu.classList.toggle('top-16');
+                mobileMenu.classList.toggle('left-0');
+                mobileMenu.classList.toggle('w-full');
+                mobileMenu.classList.toggle('bg-black');
+                mobileMenu.classList.toggle('p-4');
+                mobileMenu.classList.toggle('space-y-4');
+                mobileMenu.classList.toggle('space-x-0');
+            });
+        });
+
+        document.getElementById('waForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // cegah submit default
+
+    // Ambil data dari input
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    // Validasi (optional)
+    if (!name || !email || !subject || !message) {
+        alert('Harap isi semua kolom sebelum mengirim.');
+        return;
+    }
+
+    // Format pesan WhatsApp
+    const waMessage = `Halo, saya ${name}%0AEmail: ${email}%0ASubject: ${subject}%0APesan: ${message}`;
+    const phoneNumber = '6281213029923'; // ganti ke nomor kamu tanpa spasi
+
+    // Redirect ke WhatsApp
+    window.open(`https://wa.me/${phoneNumber}?text=${waMessage}`, '_blank');
+});
+    </script>
+</body>
+</html>
